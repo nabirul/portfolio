@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nabirul — Technician &amp; Digital Marketer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#EDEFE9;
+    --panel:#F7F8F4;
+    --ink:#17241C;
+    --ink-soft:#4A5750;
+    --line:#C9CFC2;
+    --copper:#B5642B;
+    --copper-soft:#E8D2BE;
+    --teal:#2C5F68;
+    --teal-soft:#D7E4E3;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-0.01em;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  a{color:inherit;}
+  .wrap{max-width:960px;margin:0 auto;padding:0 28px;}
+
+  /* background trace grid */
+  .grid-bg{
+    position:fixed;inset:0;z-index:-1;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:36px 36px;
+    opacity:.35;
+  }
+
+  nav{
+    position:sticky;top:0;z-index:10;
+    background:rgba(237,239,233,.9);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{
+    display:flex;justify-content:space-between;align-items:center;
+    height:64px;
+  }
+  .brand{font-size:1.05rem;font-weight:700;}
+  .brand span{color:var(--copper);}
+  nav ul{list-style:none;display:flex;gap:26px;}
+  nav a{text-decoration:none;font-size:.92rem;color:var(--ink-soft);}
+  nav a:hover{color:var(--ink);}
+
+  /* HERO — spec-sheet card */
+  header.hero{padding:76px 0 56px;}
+  .hero-grid{
+    display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:start;
+  }
+  .hero h1{font-size:clamp(2.3rem,5vw,3.4rem);line-height:1.05;margin-bottom:18px;}
+  .hero p.role{font-size:1.15rem;color:var(--teal);font-weight:500;margin-bottom:18px;}
+  .hero p.lede{max-width:46ch;color:var(--ink-soft);font-size:1.02rem;}
+  .spec-card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:4px;
+    overflow:hidden;
+  }
+  .spec-card .cap{
+    padding:10px 16px;border-bottom:1px solid var(--line);
+    font-size:.78rem;color:var(--ink-soft);
+  }
+  .spec-row{
+    display:flex;justify-content:space-between;gap:12px;
+    padding:11px 16px;border-bottom:1px solid var(--line);
+    font-size:.88rem;
+  }
+  .spec-row:last-child{border-bottom:none;}
+  .spec-row dt{color:var(--ink-soft);}
+  .spec-row dd{font-family:'JetBrains Mono',monospace;font-size:.83rem;text-align:right;}
+
+  section{padding:52px 0;border-top:1px solid var(--line);}
+  h2.head{font-size:1.5rem;margin-bottom:26px;}
+
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:28px;}
+  .card{
+    background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:24px;
+  }
+  .card h3{font-size:1.08rem;margin-bottom:10px;}
+  .card .tag{
+    display:inline-block;font-size:.72rem;font-family:'JetBrains Mono',monospace;
+    padding:2px 8px;border-radius:3px;margin-bottom:12px;
+  }
+  .tag.copper{background:var(--copper-soft);color:var(--copper);}
+  .tag.teal{background:var(--teal-soft);color:var(--teal);}
+  .card p{color:var(--ink-soft);font-size:.93rem;}
+  .card ul{margin-top:12px;padding-left:18px;color:var(--ink-soft);font-size:.9rem;}
+  .card li{margin-bottom:4px;}
+
+  .work-item{
+    display:grid;grid-template-columns:170px 1fr;gap:22px;
+    padding:20px 0;border-bottom:1px solid var(--line);
+  }
+  .work-item:last-child{border-bottom:none;}
+  .work-item .meta{color:var(--ink-soft);font-size:.82rem;font-family:'JetBrains Mono',monospace;}
+  .work-item h3{font-size:1.02rem;margin-bottom:6px;}
+  .work-item p{color:var(--ink-soft);font-size:.92rem;}
+
+  .skill-groups{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .skill-groups h3{font-size:.85rem;color:var(--copper);text-transform:none;margin-bottom:10px;font-family:'JetBrains Mono',monospace;font-weight:500;}
+  .skill-groups ul{list-style:none;font-size:.9rem;color:var(--ink-soft);}
+  .skill-groups li{padding:5px 0;border-bottom:1px dashed var(--line);}
+  .skill-groups li:last-child{border-bottom:none;}
+
+  footer{padding:44px 0 60px;}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:end;}
+  .contact-grid a.btn{
+    display:inline-block;background:var(--ink);color:var(--bg);
+    padding:12px 22px;border-radius:4px;text-decoration:none;font-weight:500;font-size:.92rem;
+  }
+  .contact-list{list-style:none;font-size:.92rem;color:var(--ink-soft);}
+  .contact-list li{margin-bottom:6px;}
+  .fine{margin-top:40px;font-size:.78rem;color:var(--ink-soft);}
+
+  @media(max-width:720px){
+    .hero-grid,.split,.contact-grid{grid-template-columns:1fr;}
+    .skill-groups{grid-template-columns:1fr;}
+    .work-item{grid-template-columns:1fr;gap:6px;}
+  }
+
+  :focus-visible{outline:2px solid var(--copper);outline-offset:2px;}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} }
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">Nabirul<span>.</span></div>
+    <ul>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#expertise">Expertise</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <h1>Fixing hardware.<br>Growing brands.</h1>
+      <p class="role">Computer Technician &amp; Digital Marketer</p>
+      <p class="lede">I run a computer repair &amp; sales business on the ground in Malda, and a digital marketing practice alongside it — one hand on a soldering iron, the other on an ad manager dashboard.</p>
+    </div>
+    <div class="spec-card">
+      <div class="cap mono">// profile</div>
+      <dl>
+        <div class="spec-row"><dt>Base</dt><dd>Malda, West Bengal, IN</dd></div>
+        <div class="spec-row"><dt>Startup</dt><dd>PC‑Boy Quick Computer Service</dd></div>
+        <div class="spec-row"><dt>Founded</dt><dd>2025</dd></div>
+        <div class="spec-row"><dt>Marketing</dt><dd>nabirulislamsekh.in</dd></div>
+        <div class="spec-row"><dt>Focus</dt><dd>Software Repair · Ads · Web</dd></div>
+        <div class="spec-row"><dt>Status</dt><dd>Open to work</dd></div>
+      </dl>
+    </div>
+  </div>
+</header>
+
+<section id="expertise">
+  <div class="wrap">
+    <h2 class="head">What I do</h2>
+    <div class="split">
+      <div class="card">
+        <span class="tag copper">software</span>
+        <h3>PC‑Boy Quick Computer Service</h3>
+        <p>A full‑time onsite computer repair startup, founded in 2025, working out of two service centres in Malda — BSF Camp More, Narayanpur and Jhaljaliya Station Road. I specialise in software‑level fixes — every kind of software problem, resolved at the source.</p>
+        <ul>
+          <li>Software troubleshooting &amp; OS repair</li>
+          <li>Onsite computer repair service</li>
+          <li>Laptop &amp; desktop hardware repair</li>
+          <li>Refurbished mini PC sales (HP, Dell, Lenovo, Acer)</li>
+          <li>AMC / MMC service contracts</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="tag teal">marketing</span>
+        <h3>Digital Nabirul</h3>
+        <p>A self‑taught digital marketing practice, running Meta campaigns and building web presence for local businesses and my own ventures — currently leveling up from intermediate to advanced in Facebook ads, and learning website design &amp; development.</p>
+        <ul>
+          <li>Meta / Facebook ad campaigns (intermediate → advanced)</li>
+          <li>Client acquisition via Instagram</li>
+          <li>Website design &amp; development (learning)</li>
+          <li>Content for local, coaching &amp; retail brands</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <h2 class="head">Selected work</h2>
+
+    <div class="work-item">
+      <div class="meta">CLIENT SITE</div>
+      <div>
+        <h3>Vikash Child Development Center</h3>
+        <p>Freelance WordPress website built for a child development centre client, taken from concept through to a live site.</p>
+      </div>
+    </div>
+
+    <div class="work-item">
+      <div class="meta">AD MANAGEMENT</div>
+      <div>
+        <h3>Sanjib's Academy</h3>
+        <p>Running Meta Ads for a coaching centre client — campaign setup, targeting and ongoing optimisation for student enrolment.</p>
+      </div>
+    </div>
+
+    <div class="work-item">
+      <div class="meta">WEB BUILD</div>
+      <div>
+        <h3>PC‑Boy Web Store</h3>
+        <p>Built and maintain the PC‑Boy website and WooCommerce store, connecting shop inventory and pricing to an online storefront.</p>
+      </div>
+    </div>
+
+    <div class="work-item">
+      <div class="meta">MOCKUP</div>
+      <div>
+        <h3>Luxury Salon Concept</h3>
+        <p>An HTML/CSS website mockup built as a visual reference piece for a salon client pitch.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <h2 class="head">Skills</h2>
+    <div class="skill-groups">
+      <div>
+        <h3>hardware</h3>
+        <ul>
+          <li>Desktop &amp; laptop repair</li>
+          <li>Custom PC builds</li>
+          <li>Networking &amp; setup</li>
+          <li>AMC / MMC servicing</li>
+        </ul>
+      </div>
+      <div>
+        <h3>marketing</h3>
+        <ul>
+          <li>Meta / Facebook Ads</li>
+          <li>Instagram growth</li>
+          <li>Local business promotion</li>
+          <li>Basic prompt engineering for AI in business workflows</li>
+        </ul>
+      </div>
+      <div>
+        <h3>web</h3>
+        <ul>
+          <li>WordPress &amp; Elementor</li>
+          <li>WooCommerce (WordPress-based)</li>
+          <li>HTML / CSS (learning)</li>
+          <li>Website design &amp; development (learning)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <h2 class="head">Get in touch</h2>
+    <div class="contact-grid">
+      <div>
+        <p style="color:var(--ink-soft);max-width:42ch;margin-bottom:20px;">Looking for a repair, a custom build, or someone to run your ad campaigns — reach out.</p>
+        <a class="btn" href="mailto:hello@pcboy.in">hello@pcboy.in</a>
+      </div>
+      <ul class="contact-list">
+        <li>Instagram — @digitalnabirul</li>
+        <li>pcboy.in</li>
+        <li>nabirulislamsekh.in</li>
+        <li>Malda, West Bengal, India</li>
+      </ul>
+    </div>
+    <p class="fine">© <span id="yr"></span> Nabirul. Built by hand.</p>
+  </div>
+</footer>
+
+<script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+</body>
+</html>
